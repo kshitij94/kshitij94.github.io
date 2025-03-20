@@ -1,0 +1,191 @@
+int PIN_left = A2;
+int PIN_Middle = A1;
+int PIN_right = A0;
+int PIN_Motor_STBY = 3;
+int PIN_Motor_AIN_1 = 7;
+int PIN_Motor_BIN_1 = 8;
+int PIN_Motor_PWMB = 6;
+int PIN_Motor_PWMA = 5;
+int forward_SPEED=50;
+int rotate_speed=50;
+int rotate_for=50;
+int forward_for=10;
+int maxMoves = 1000;
+int moves = 0;
+bool explorationFailed=false;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(PIN_left,INPUT);
+  pinMode(PIN_Middle,INPUT);
+  pinMode(PIN_right,INPUT);
+pinMode(PIN_Motor_STBY, OUTPUT);
+pinMode(PIN_Motor_PWMA, OUTPUT);
+pinMode(PIN_Motor_PWMB, OUTPUT);
+pinMode(PIN_Motor_AIN_1, OUTPUT);
+pinMode(PIN_Motor_BIN_1, OUTPUT);
+Serial.print("\n Waiting for 5 seconds for setup!");
+  delay(5000);
+
+  // Few initial reading of the photoelectric sensors can be inaccurate.
+  // So just read a few times and ignore its values.
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+  checkOnLine();
+
+}
+
+void loop() {
+  if (explorationFailed == true) {
+      return;
+    } 
+    
+  if (moves > maxMoves) {
+    stop();
+    return;
+  } 
+  
+  moves++;
+  Serial.print("\n");
+
+    int leftReading = analogRead(PIN_left);
+    int rightReading = analogRead(PIN_right);
+    int middleReading = analogRead(PIN_Middle);
+
+    Serial.print("\nPIN_left=");
+    Serial.print(leftReading);
+    Serial.print("  PIN_Middle=");
+    Serial.print(middleReading);
+    Serial.print("  PIN_right=");
+    Serial.print(rightReading);
+    bool isLeftOnLine = onLine(leftReading);
+    bool isMiddleOnLine = onLine(middleReading);
+    bool isRightOnLine = onLine(rightReading);
+    Serial.print("\nisLeftOnLine=");
+    Serial.print(isLeftOnLine);
+    Serial.print(" isMiddleOnLine=");
+    Serial.print(isMiddleOnLine);
+    Serial.print(" isRightOnLine=");
+    Serial.print(isRightOnLine);
+
+    if (isMiddleOnLine){
+      farward();
+    } else if (isLeftOnLine) {
+      left();
+      while(!middleOnLine()) {
+        delay(1);
+      }
+      farward();
+    } else if (isRightOnLine) {
+      right();
+      while(!middleOnLine()) {
+        delay(1);
+      }
+      farward();      
+    }  else {
+      Serial.print("\n None of the pins on the line. Will need to explore.");
+      stop();
+      explore();
+      stop();
+    }
+}
+
+bool middleOnLine() {
+    int middleReading = analogRead(PIN_Middle);
+    bool isMiddleOnLine = onLine(middleReading);
+    return   isMiddleOnLine;
+}
+void explore() {
+  right();
+  unsigned long startTime = millis();
+  unsigned long endTime = startTime + 500; // Calculate the end time (10 seconds = 10000 milliseconds)
+  while (millis() < endTime) {
+    // Your code to execute within the 10-second loop goes here.
+    // Example:
+    if (checkOnLine()) {
+      return;
+    }
+  }
+  left();
+  startTime = millis();
+  endTime = startTime + 1000; // Calculate the end time (10 seconds = 10000 milliseconds)
+  while (millis() < endTime) {
+    // Your code to execute within the 10-second loop goes here.
+    // Example:
+    if (checkOnLine()) {
+      return;
+    }
+  }
+  Serial.print("\n Exploration failed!! Could not find the line.");
+  explorationFailed=true;
+  stop();
+}
+
+bool checkOnLine() {
+    int leftReading = analogRead(PIN_left);
+    int rightReading = analogRead(PIN_right);
+    int middleReading = analogRead(PIN_Middle);
+    bool isLeftOnLine = onLine(leftReading);
+    bool isMiddleOnLine = onLine(middleReading);
+    bool isRightOnLine = onLine(rightReading);
+    return isLeftOnLine || isMiddleOnLine || isRightOnLine;
+}
+
+bool onLine(int reading) {
+  if (reading > 400) {
+    return true;
+  }
+  return false;
+}
+
+void right() {
+    Serial.print("\n turning right");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_BIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMB, rotate_speed);
+  digitalWrite(PIN_Motor_AIN_1, LOW);
+  analogWrite(PIN_Motor_PWMA, rotate_speed);
+}
+
+
+void left() {
+    Serial.print("\n turning left");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_BIN_1, LOW);
+  analogWrite(PIN_Motor_PWMB, rotate_speed);
+  digitalWrite(PIN_Motor_AIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMA, rotate_speed);
+}
+
+/*
+void backward() {
+    Serial.print("\nmoving backward");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+
+  digitalWrite(PIN_Motor_BIN_1, LOW);
+  analogWrite(PIN_Motor_PWMB, forward_SPEED);
+  digitalWrite(PIN_Motor_AIN_1, LOW);
+  analogWrite(PIN_Motor_PWMA, forward_SPEED);
+  delay(1000);
+  stop();       
+}
+*/
+void farward() {
+  Serial.print("\nmoving farward");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_AIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMA, forward_SPEED);
+  digitalWrite(PIN_Motor_BIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMB, forward_SPEED);
+}
+
+void stop() {
+  analogWrite(PIN_Motor_PWMB, 0);
+  analogWrite(PIN_Motor_PWMA, 0);
+  digitalWrite(PIN_Motor_STBY, LOW);
+}
