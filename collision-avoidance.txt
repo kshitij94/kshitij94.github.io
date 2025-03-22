@@ -1,0 +1,199 @@
+#include <Servo.h>
+
+// Ultra sonic params:
+int TRIG_PIN=13;
+int ECHO_PIN=12;
+int MAX_DISTANCE=200;
+int OBSTACLE_DIST_CM = 30;
+
+// Moving car params:
+int PIN_left = A2;
+int PIN_Middle = A1;
+int PIN_right = A0;
+int PIN_Motor_STBY = 3;
+int PIN_Motor_AIN_1 = 7;
+int PIN_Motor_BIN_1 = 8;
+int PIN_Motor_PWMB = 6;
+int PIN_Motor_PWMA = 5;
+int LINEAR_SPEED=90;
+int ROTATE_SPEED=100;
+int rotate_for=50;
+int forward_for=10;
+int maxMoves = 10;
+int moves = 0;
+int LEFT_DELAY = 600;
+int RIGHT_DELAY = 600;
+int BACKWARD_DELAY = 2000;
+bool objectAvoidanceFailed = false;
+
+
+//Servo params
+int SERVO_PIN = 10;
+Servo myservo;
+int pos=0;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(PIN_left,INPUT);
+  pinMode(PIN_Middle,INPUT);
+  pinMode(PIN_right,INPUT);
+  pinMode(PIN_Motor_STBY, OUTPUT);
+  pinMode(PIN_Motor_PWMA, OUTPUT);
+  pinMode(PIN_Motor_PWMB, OUTPUT);
+  pinMode(PIN_Motor_AIN_1, OUTPUT);
+  pinMode(PIN_Motor_BIN_1, OUTPUT);
+  myservo.attach(SERVO_PIN);
+  Serial.print("\n Waiting for 5 seconds for setup!");
+  delay(5000);
+}
+
+
+void loop() {
+  if (objectAvoidanceFailed) {
+    stop();
+    return;
+  }
+  Serial.print("\n");
+  if (isObstacle()) {
+    stop();
+    Serial.print("\nObstacle found");
+    if (avoidObstacle()) {
+      Serial.print("\nObstacle avoided!");
+      forward();
+    } else {
+      objectAvoidanceFailed = true;
+    }
+  } else {
+    Serial.print("\nNo Obstacle found");
+    forward();
+  }
+}
+
+bool isLeftFree() {
+  myservo.write(175);
+  delay(500);
+  bool ans = isObstacle();
+  myservo.write(90);
+  delay(500);
+  return !ans;
+}
+
+bool isRightFree() {
+  myservo.write(5);
+  delay(500);
+  bool ans = isObstacle();
+  myservo.write(90);
+  delay(500);
+  return !ans;
+}
+
+bool avoidObstacle() {
+  // first try left
+  if (isLeftFree()) {
+    Serial.print("\nLeft is free.");
+    left();
+    delay(LEFT_DELAY);
+    stop();
+    return true;
+  }
+  
+  if (isRightFree()) {
+    Serial.print("\nLeft is right.");
+    right();
+    delay(LEFT_DELAY);
+    stop();
+    return true;
+  }
+  
+  //Try backing
+  backward();
+  delay(BACKWARD_DELAY);
+  stop();
+
+  // After taking back, lets try left and right one more time.
+  if (isLeftFree()) {
+    Serial.print("\nLeft is free after backing.");    
+    left();
+    delay(LEFT_DELAY);
+    stop();
+    return true;
+  }
+  
+  if (isRightFree()) {
+    Serial.print("\nRight is free after backing.");    
+    right();
+    delay(LEFT_DELAY);
+    stop();
+    return true;
+  }
+  Serial.print("\nFailed to avoid obstacle!");
+  return false;
+}
+
+bool isObstacle() {
+  Serial.print("\nTesting for obstacle:");
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  int distanceInCM = duration/58;
+  if (distanceInCM != 0) {
+    Serial.print("\n Distance in cm ");
+    Serial.print(distanceInCM);
+  }
+  if (distanceInCM == 0){
+    return false;
+  }
+  if (distanceInCM < OBSTACLE_DIST_CM) {
+    return true;
+  }
+  return false;
+}
+
+void right() {
+    Serial.print("\n turning right");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_BIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMB, ROTATE_SPEED);
+  digitalWrite(PIN_Motor_AIN_1, LOW);
+  analogWrite(PIN_Motor_PWMA, ROTATE_SPEED);
+}
+
+void left() {
+    Serial.print("\n turning left");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_BIN_1, LOW);
+  analogWrite(PIN_Motor_PWMB, ROTATE_SPEED);
+  digitalWrite(PIN_Motor_AIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMA, ROTATE_SPEED);
+}
+
+void backward() {
+  Serial.print("\nmoving backward");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_BIN_1, LOW);
+  analogWrite(PIN_Motor_PWMB, LINEAR_SPEED);
+  digitalWrite(PIN_Motor_AIN_1, LOW);
+  analogWrite(PIN_Motor_PWMA, LINEAR_SPEED);
+}
+
+void forward() {
+  Serial.print("\nmoving forward");  // prints a label
+  digitalWrite(PIN_Motor_STBY, HIGH);
+  digitalWrite(PIN_Motor_AIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMA, LINEAR_SPEED);
+  digitalWrite(PIN_Motor_BIN_1, HIGH);
+  analogWrite(PIN_Motor_PWMB, LINEAR_SPEED);
+}
+
+void stop() {
+  analogWrite(PIN_Motor_PWMB, 0);
+  analogWrite(PIN_Motor_PWMA, 0);
+  digitalWrite(PIN_Motor_STBY, LOW);
+}

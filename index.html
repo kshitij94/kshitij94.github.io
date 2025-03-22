@@ -39,6 +39,11 @@
                               Line Tracker
                           </a>
                     </li>
+                    <li class="menu-list-items">
+                      <a class="links" href="#collisionavoidance">
+                        Collision avoidance
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -61,7 +66,7 @@
       <div class="about-text">
           <h1 class="my-heading">Line Tracker Robot</h1>
           <p class="lead-para">
-            Goal of the project is to create a robot car that can follow a given black tape defined path.
+            Goal of the project is to create a robot car that can follow a given path.
           </p>
           <p>
             This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and ITR20001 photoelectric sensors. The sensor incorporates three infrared emitter-receiver pair and an NPN phototransistor. The sensor detects reflected infrared light, enabling the detection of surface reflectivity variations (light/dark, color) and proximity. Three independent sensors are employed, each providing an analog output corresponding to the reflected light intensity. By reading these analog values via the Arduino's analog input pins, we can determine which sensor(s) are detecting the black line. This information is then used to implement a line-following algorithm, controlling the robot's motors to maintain the desired trajectory.
@@ -79,6 +84,45 @@
   </section>
 
 
+
+  <section id="collisionavoidance" class="about">
+    <div class="about-text">
+        <h1 class="my-heading">Collision Avoidance Robot</h1>
+        <p class="lead-para">
+          Goal of the project is to create a robot car that can explore the room without colliding into objects.
+        </p>
+        <p>
+          This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors. 
+          The principle of ultrasonic distance measurement is that
+
+          the transmitter emits ultrasonic waves in a certain direction and starts
+          
+          timing at the same time of the launch moment. The ultrasonic waves travel
+          
+          through the air and returns immediately when encountering obstacles.
+          
+          Then the ultrasonic receiver stops timing immediately when receiving the
+          
+          reflected waves. According to the recorded time and the known condition
+          
+          that ultrasonic propagation speed in the air is 340m/s, the distance between
+          
+          the ultrasonic module and the obstacle can be obtained. 
+          
+          While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the ultrasonic sensor left and right, then turns to the clear path and proceeds.      
+        </p>     
+        <p>
+          Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
+        </p>
+      </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="collisionavoidance.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+</section>
 
 
     <script src=
