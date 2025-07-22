@@ -81,49 +81,73 @@
           Your browser does not support the video tag.
         </video>
       </div>
-  </section>
+    </section>
 
+    <section id="collisionavoidance" class="about">
+      <div class="about-text">
+          <h1 class="my-heading">Collision Avoidance Robot</h1>
+          <p class="lead-para">
+            Goal of the project is to create a robot car that can explore the room without colliding into objects.
+          </p>
+          <p>
+            This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors. 
+            The principle of ultrasonic distance measurement is that
 
-
-  <section id="collisionavoidance" class="about">
-    <div class="about-text">
-        <h1 class="my-heading">Collision Avoidance Robot</h1>
-        <p class="lead-para">
-          Goal of the project is to create a robot car that can explore the room without colliding into objects.
-        </p>
-        <p>
-          This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors. 
-          The principle of ultrasonic distance measurement is that
-
-          the transmitter emits ultrasonic waves in a certain direction and starts
-          
-          timing at the same time of the launch moment. The ultrasonic waves travel
-          
-          through the air and returns immediately when encountering obstacles.
-          
-          Then the ultrasonic receiver stops timing immediately when receiving the
-          
-          reflected waves. According to the recorded time and the known condition
-          
-          that ultrasonic propagation speed in the air is 340m/s, the distance between
-          
-          the ultrasonic module and the obstacle can be obtained. 
-          
-          While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the ultrasonic sensor left and right, then turns to the clear path and proceeds.      
-        </p>     
-        <p>
-          Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
-        </p>
+            the transmitter emits ultrasonic waves in a certain direction and starts
+            
+            timing at the same time of the launch moment. The ultrasonic waves travel
+            
+            through the air and returns immediately when encountering obstacles.
+            
+            Then the ultrasonic receiver stops timing immediately when receiving the
+            
+            reflected waves. According to the recorded time and the known condition
+            
+            that ultrasonic propagation speed in the air is 340m/s, the distance between
+            
+            the ultrasonic module and the obstacle can be obtained. 
+            
+            While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the ultrasonic sensor left and right, then turns to the clear path and proceeds.      
+          </p>     
+          <p>
+            Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
+          </p>
+        </div>
+      <div class="about-image">
+        <video width="500" height="500" controls>
+          <source src="collisionavoidance.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-    <div class="about-image">
-      <video width="500" height="500" controls>
-        <source src="collisionavoidance.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    </section>
 
-</section>
+    <section id="2dof-forward-kinematic" class="about">
+      <div class="about-text">
+          <h1 class="my-heading">Demonstrate Forward Kinematic with 2 Degree of Freedom Arm</h1>
+          <p class="lead-para">
+            Goal was to master 3D printing and core ROS concepts, including controllers, URDF, and launch files, through the hands-on development of a 2-DOF robotic arm.
+          </p>
+          <p>
+            To embark on building a simple robotic arm, my initial step was to master 3D printing. I utilized SolidWorks for the arm's design, then brought it to life using a Prusa 3D printer. A crucial lesson here was the importance of precise measurements, especially for components like the SG90 servos; acquiring calipers proved essential for ensuring everything fit together seamlessly.
 
+Once the arm was fabricated, I shifted my focus to the Robot Operating System (ROS). ROS is an incredibly powerful framework that provides tools to integrate a SolidWorks-designed arm, complete with its joints and links. It also offers controllers that enable precise robot movement to desired locations. For this project, I concentrated on forward kinematics: a user inputs the desired joint angles, and ROS transmits these angles to an Arduino via a serial port. Learning serial communication in C++ was a particularly enjoyable part of the process.
+
+The practical application of this project lies in allowing a robot to follow a predefined path, such as in automated car painting. This approach, while not involving AI, effectively demonstrates how to hardcode a robot's movements. Throughout development, the rViz tool was invaluable for simulating the arm's behavior and debugging code before deploying it to the physical motors and Arduino chip.
+
+
+
+          </p>     
+          <p>
+            Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
+          </p>
+        </div>
+      <div class="about-image">
+        <video width="500" height="500" controls>
+          <source src="collisionavoidance.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
 
     <script src=
 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
