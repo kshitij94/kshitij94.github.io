@@ -133,11 +133,13 @@
             Goal was to master 3D printing and core ROS concepts, including controllers, URDF, and launch files, through the hands-on development of a 2-DOF robotic arm.
           </p>
           <p>
-            To embark on building a simple robotic arm, my initial step was to master 3D printing. I utilized SolidWorks for the arm's design, then brought it to life using a Prusa 3D printer. A crucial lesson here was the importance of precise measurements, especially for components like the SG90 servos; acquiring calipers proved essential for ensuring everything fit together seamlessly.
+This project focused on the design and implementation of a 2-DOF robotic arm, emphasizing practical application of 3D printing and core Robot Operating System (ROS) functionalities.
 
-Once the arm was fabricated, I shifted my focus to the Robot Operating System (ROS). ROS is an incredibly powerful framework that provides tools to integrate a SolidWorks-designed arm, complete with its joints and links. It also offers controllers that enable precise robot movement to desired locations. For this project, I concentrated on forward kinematics: a user inputs the desired joint angles, and ROS transmits these angles to an Arduino via a serial port. Learning serial communication in C++ was a particularly enjoyable part of the process.
+The arm's mechanical structure was designed in SolidWorks and precision-fabricated using a Prusa 3D printer. Critical to assembly was the accurate measurement of components like SG90 servos, necessitating the use of calipers for precise fitment.
 
-The practical application of this project lies in allowing a robot to follow a predefined path, such as in automated car painting. This approach, while not involving AI, effectively demonstrates how to hardcode a robot's movements. Throughout development, the rViz tool was invaluable for simulating the arm's behavior and debugging code before deploying it to the physical motors and Arduino chip.
+Subsequently, attention shifted to ROS for robotic control. Leveraging ROS, the SolidWorks model was imported, and URDF files were generated to define the arm's kinematic structure (joints and links). ROS controllers were then employed to command joint movements. The project specifically focused on forward kinematics: translating user-input joint angles into physical movements. This involved serial communication (C++) between ROS and an Arduino, which actuated the arm's motors.
+
+While lacking AI, the project demonstrated the arm's capability to execute predefined, hardcoded paths, analogous to applications like automated painting. rViz proved indispensable for simulating the arm's behavior and debugging control algorithms prior to deployment on the physical hardware.
 
 
 
