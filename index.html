@@ -2,167 +2,205 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" 
-          content="width=device-width, initial-scale=1.0">
-    <title>Robotics Projects</title>
-    <link rel="stylesheet" 
-          href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity=
-"sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-             crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotics Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body>
-    <!-- Navbar header section -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo">
-                <h2 class="logo-heading">Kshitij Pancholi</h2>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars hamburger-icon"></i>
-                <i class="fas fa-times cross-icon"></i>
-            </div>
-            <div class="menu">
-                <ul class="menu-list">
-                    <li class="menu-list-items">
-                        <a class="links" href="#home">
-                              Home
-                          </a>
-                    </li>
-                    <li class="menu-list-items">
-                        <a class="links" href="#linetracker">
-                              Line Tracker
-                          </a>
-                    </li>
-                    <li class="menu-list-items">
-                      <a class="links" href="#collisionavoidance">
-                        Collision avoidance
-                        </a>
-                    </li>
-                    <li class="menu-list-items">
-                      <a class="links" href="#2dof-forward-kinematic">
-                        2 DOF Arm
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main hero banner -->
-    <section id="home" class="hero">
-        <div class="intro">
-            <div class="headings">
-                <h3 class="greet-heading">Hello, I'm</h3>
-                <h1 class="my-heading">Kshitij Pancholi</h1>
-                <h4 class="sub-heading">
-                  As a Senior Software Engineer at Google with a decade of experience, I sought to expand my knowledge beyond traditional software development. Driven by a passion for robotics, I began exploring Arduino, ROS, and Gazebo. To gain structured learning, I enrolled in Stanford Continuing Education's 'TECH 01 Introduction to Robotics: Building Your' with Professor Prasad. His guidance, including book and kit recommendations, was invaluable. This website showcases my personal robotics projects, a separate endeavor from my professional work at Google.
-                </h4>
-            </div>
-        </div>
-    </section>
-
-    <section id="linetracker" class="about">
-      <div class="about-text">
-          <h1 class="my-heading">Line Tracker Robot</h1>
-          <p class="lead-para">
-            Goal of the project is to create a robot car that can follow a given path.
-          </p>
-          <p>
-            This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and ITR20001 photoelectric sensors. The sensor incorporates three infrared emitter-receiver pair and an NPN phototransistor. The sensor detects reflected infrared light, enabling the detection of surface reflectivity variations (light/dark, color) and proximity. Three independent sensors are employed, each providing an analog output corresponding to the reflected light intensity. By reading these analog values via the Arduino's analog input pins, we can determine which sensor(s) are detecting the black line. This information is then used to implement a line-following algorithm, controlling the robot's motors to maintain the desired trajectory.
-          </p>     
-          <p>
-            Arduino Code can be found <a href="line-tracking.txt" target="_blank">here</a>.
-          </p>
-        </div>
-      <div class="about-image">
-        <video width="500" height="500" controls>
-          <source src="linetracking.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+  <!-- Navbar header section -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">
+        <h2 class="logo-heading">Kshitij Pancholi</h2>
       </div>
-    </section>
-
-    <section id="collisionavoidance" class="about">
-      <div class="about-text">
-          <h1 class="my-heading">Collision Avoidance Robot</h1>
-          <p class="lead-para">
-            Goal of the project is to create a robot car that can explore the room without colliding into objects.
-          </p>
-          <p>
-            This project utilizes the <a href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors. 
-            The principle of ultrasonic distance measurement is that
-
-            the transmitter emits ultrasonic waves in a certain direction and starts
-            
-            timing at the same time of the launch moment. The ultrasonic waves travel
-            
-            through the air and returns immediately when encountering obstacles.
-            
-            Then the ultrasonic receiver stops timing immediately when receiving the
-            
-            reflected waves. According to the recorded time and the known condition
-            
-            that ultrasonic propagation speed in the air is 340m/s, the distance between
-            
-            the ultrasonic module and the obstacle can be obtained. 
-            
-            While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the ultrasonic sensor left and right, then turns to the clear path and proceeds.      
-          </p>     
-          <p>
-            Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
-          </p>
-        </div>
-      <div class="about-image">
-        <video width="500" height="500" controls>
-          <source src="collisionavoidance.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times cross-icon"></i>
       </div>
-    </section>
-
-    <section id="2dof-forward-kinematic" class="about">
-      <div class="about-text">
-          <h1 class="my-heading">Forward Kinematic with 2 DOF Arm</h1>
-          <p class="lead-para">
-            Goal was to master 3D printing and core ROS concepts, including controllers, URDF, and launch files, through the hands-on development of a 2-DOF robotic arm.
-          </p>
-          <p>
-This project focused on the design and implementation of a 2-DOF robotic arm, emphasizing practical application of 3D printing and core Robot Operating System (ROS) functionalities.
-
-The arm's mechanical structure was designed in SolidWorks and precision-fabricated using a Prusa 3D printer. Critical to assembly was the accurate measurement of components like SG90 servos, necessitating the use of calipers for precise fitment.
-
-Subsequently, attention shifted to ROS for robotic control. Leveraging ROS, the SolidWorks model was imported, and URDF files were generated to define the arm's kinematic structure (joints and links). ROS controllers were then employed to command joint movements. The project specifically focused on forward kinematics: translating user-input joint angles into physical movements. This involved serial communication (C++) between ROS and an Arduino, which actuated the arm's motors.
-
-While lacking AI, the project demonstrated the arm's capability to execute predefined, hardcoded paths, analogous to applications like automated painting. rViz proved indispensable for simulating the arm's behavior and debugging control algorithms prior to deployment on the physical hardware.
-
-
-
-          </p>     
-          <p>
-            Project code can be found <a href="https://github.com/kshitij94/robot-arm-with-controller" target="_blank">here</a>.
-          </p>
-        </div>
-      <div class="about-image">
-        <video width="500" height="500" controls>
-          <source src="2DOFarmpoweredbyroscontroller.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <div class="menu">
+        <ul class="menu-list">
+          <li class="menu-list-items">
+            <a class="links" href="#home">
+              Home
+            </a>
+          </li>
+          <li class="menu-list-items">
+            <a class="links" href="#linetracker">
+              Line Tracker
+            </a>
+          </li>
+          <li class="menu-list-items">
+            <a class="links" href="#collisionavoidance">
+              Collision avoidance
+            </a>
+          </li>
+          <li class="menu-list-items">
+            <a class="links" href="#2dof-forward-kinematic">
+              2 DOF Arm
+            </a>
+          </li>
+        </ul>
       </div>
-    </section>
+    </nav>
+  </header>
 
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
-        integrity=
-"sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-      </script>
-    <script src="script.js"></script>
+  <!-- Main hero banner -->
+  <section id="home" class="hero">
+    <div class="intro">
+      <div class="headings">
+        <h3 class="greet-heading">Hello, I'm</h3>
+        <h1 class="my-heading">Kshitij Pancholi</h1>
+        <h4 class="sub-heading">
+          Here are the list of robotics projects i have attempted.
+        </h4>
+      </div>
+    </div>
+  </section>
+
+  <section id="linetracker" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Line Tracker Robot</h1>
+      <p class="lead-para">
+        Goal of the project is to create a robot car that can follow a given path.
+      </p>
+      <p>
+        This project utilizes the <a
+          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
+          kit</a>, which includes an Arduino microcontroller and ITR20001 photoelectric sensors. The sensor incorporates
+        three infrared emitter-receiver pair and an NPN phototransistor. The sensor detects reflected infrared light,
+        enabling the detection of surface reflectivity variations (light/dark, color) and proximity. Three independent
+        sensors are employed, each providing an analog output corresponding to the reflected light intensity. By reading
+        these analog values via the Arduino's analog input pins, we can determine which sensor(s) are detecting the
+        black line. This information is then used to implement a line-following algorithm, controlling the robot's
+        motors to maintain the desired trajectory.
+      </p>
+      <p>
+        Arduino Code can be found <a href="line-tracking.txt" target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="linetracking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="collisionavoidance" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Collision Avoidance Robot</h1>
+      <p class="lead-para">
+        Goal of the project is to create a robot car that can explore the room without colliding into objects.
+      </p>
+      <p>
+        This project utilizes the <a
+          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
+          kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors.
+        The principle of ultrasonic distance measurement is that
+
+        the transmitter emits ultrasonic waves in a certain direction and starts
+
+        timing at the same time of the launch moment. The ultrasonic waves travel
+
+        through the air and returns immediately when encountering obstacles.
+
+        Then the ultrasonic receiver stops timing immediately when receiving the
+
+        reflected waves. According to the recorded time and the known condition
+
+        that ultrasonic propagation speed in the air is 340m/s, the distance between
+
+        the ultrasonic module and the obstacle can be obtained.
+
+        While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the
+        ultrasonic sensor left and right, then turns to the clear path and proceeds.
+      </p>
+      <p>
+        Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="collisionavoidance.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="2dof-forward-kinematic" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Forward Kinematic with 2 DOF Arm</h1>
+      <p class="lead-para">
+        Goal was to master 3D printing and core ROS concepts, including controllers, URDF, and launch files, through the
+        hands-on development of a 2-DOF robotic arm.
+      </p>
+      <p>
+        This project focused on the design and implementation of a 2-DOF robotic arm, emphasizing practical application
+        of 3D printing and core Robot Operating System (ROS) functionalities.
+
+        The arm's mechanical structure was designed in SolidWorks and precision-fabricated using a Prusa 3D printer.
+        Critical to assembly was the accurate measurement of components like SG90 servos, necessitating the use of
+        calipers for precise fitment.
+
+        Subsequently, attention shifted to ROS for robotic control. Leveraging ROS, the SolidWorks model was imported,
+        and URDF files were generated to define the arm's kinematic structure (joints and links). ROS controllers were
+        then employed to command joint movements. The project specifically focused on forward kinematics: translating
+        user-input joint angles into physical movements. This involved serial communication (C++) between ROS and an
+        Arduino, which actuated the arm's motors.
+
+        While lacking AI, the project demonstrated the arm's capability to execute predefined, hardcoded paths,
+        analogous to applications like automated painting. rViz proved indispensable for simulating the arm's behavior
+        and debugging control algorithms prior to deployment on the physical hardware.
+
+
+
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/robot-arm-with-controller"
+          target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="2DOFarmpoweredbyroscontroller.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="6dof-ik" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Inverse Kinematic simulation for 6 DOF Arm</h1>
+      <p class="lead-para">
+        Before designing and 3D printing an full scale 6DOF robotic arm, I wanted to see if the Inverse kinematics works
+        on a simulated arm.
+      </p>
+      <p>
+        Created a 6DOF arm and setup the moveit packages. Then i wrote a client that would instruct moveit grp node to
+        position the end effector to
+        hardcoded location. Few learnings are moveit OMPL planner only works with 6+ DOF arm. Another learning was
+        optimal arm design is adjacent joints must have perpendicular axis of rotation.
+
+
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/arm-6dof-sim-inverse-kinematics"
+          target="_blank">here</a>.
+      </p>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+    integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
