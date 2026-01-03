@@ -45,6 +45,12 @@
               2 DOF Arm
             </a>
           </li>
+          <li class="menu-list-items">
+            <a class="links" href="#cycloidal-gear">
+              2 DOF Arm
+            </a>
+          </li>
+
         </ul>
       </div>
     </nav>
@@ -194,6 +200,33 @@
           target="_blank">here</a>.
       </p>
     </div>
+  </section>
+
+  <section id="cycloidal-gear" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">3D printing a gear box</h1>
+      <p class="lead-para">
+        Standard stepper motors are low in torque and high in speed. For a robotic arm, we need the opposite. Gear box
+        solves this by converting the speed into higher torque and lower and smooth motion.
+      </p>
+      <p>
+        I chose to design a cycloidal drive because it is easy to 3D print and offers virtually zero backlash or jitter.
+        With a 21:1 reduction ratio, the drive effectively converts the stepper motor's 59 Ncm of torque into an output
+        of 130 Ncm. While a 21:1 ratio requires 21 full motor rotations for every single output rotation, this
+        mechanical
+        advantage provides the precision and strength necessary for high-accuracy applications.
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/cyclodial_gear_box" target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="cyclodial_gear_box.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
