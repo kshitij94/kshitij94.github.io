@@ -19,45 +19,6 @@
       <div class="logo">
         <h2 class="logo-heading">Kshitij Pancholi</h2>
       </div>
-      <div class="hamburger" id="hamburger">
-        <i class="fas fa-bars hamburger-icon"></i>
-        <i class="fas fa-times cross-icon"></i>
-      </div>
-      <div class="menu">
-        <ul class="menu-list">
-          <li class="menu-list-items">
-            <a class="links" href="#home">
-              Home
-            </a>
-          </li>
-          <li class="menu-list-items">
-            <a class="links" href="#linetracker">
-              Line Tracker
-            </a>
-          </li>
-          <li class="menu-list-items">
-            <a class="links" href="#collisionavoidance">
-              Collision avoidance
-            </a>
-          </li>
-          <li class="menu-list-items">
-            <a class="links" href="#2dof-forward-kinematic">
-              2 DOF Arm
-            </a>
-          </li>
-          <li class="menu-list-items">
-            <a class="links" href="#ball-bearing">
-              Ball Bearings
-            </a>
-          </li>
-          <li class="menu-list-items">
-            <a class="links" href="#cycloidal-gear">
-              Gear box
-            </a>
-          </li>
-
-        </ul>
-      </div>
     </nav>
   </header>
 
@@ -198,7 +159,6 @@
         hardcoded location. Few learnings are moveit OMPL planner only works with 6+ DOF arm. Another learning was
         optimal arm design is adjacent joints must have perpendicular axis of rotation.
 
-
       </p>
       <p>
         Project code can be found <a href="https://github.com/kshitij94/arm-6dof-sim-inverse-kinematics"
@@ -214,14 +174,17 @@
         Ordering a metal ball bearing can become very expensive for large-scale applications.
       </p>
       <p>
-        To keep the cost low, I designed and 3D printed a custom ball bearing which uses 4.5mm steel balls. 
-        The mechanism is pretty cool: the outer housing of the ball bearing has a dedicated entry hole where the balls can be fed inside the bearing, which is then secured by inserting a custom cork to close the hole.
+        To keep the cost low, I designed and 3D printed a custom ball bearing which uses 4.5mm steel balls.
+        The mechanism is pretty cool: the outer housing of the ball bearing has a dedicated entry hole where the balls
+        can be fed inside the bearing, which is then secured by inserting a custom cork to close the hole.
       </p>
       <p>
-        The entire model was designed in Fusion 360 using its Python API. The script is input dialog-driven, allowing the user to dynamically enter the desired outer diameter to generate and print the respective ball bearing.
+        The entire model was designed in Fusion 360 using its Python API. The script is input dialog-driven, allowing
+        the user to dynamically enter the desired outer diameter to generate and print the respective ball bearing.
       </p>
       <p>
-        Project code can be found <a href="https://github.com/kshitij94/fusion-360-ball-bearing" target="_blank">here</a>.
+        Project code can be found <a href="https://github.com/kshitij94/fusion-360-ball-bearing"
+          target="_blank">here</a>.
       </p>
     </div>
     <div class="about-image">
@@ -233,9 +196,9 @@
     </div>
   </section>
 
-  <section id="cycloidal-gear" class="about">
+  <section id="3dof-base-joint" class="about">
     <div class="about-text">
-      <h1 class="my-heading">3D printing a gear box</h1>
+      <h1 class="my-heading">3 DOF Arm - Base Joint</h1>
       <p class="lead-para">
         Standard stepper motors are characterized by high speed but low torque, which is often the opposite of what a
         robotic arm requires.
@@ -261,7 +224,111 @@
         Your browser does not support the video tag.
       </video>
     </div>
+  </section>
 
+  <section id="3dof-joint-1" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">3 DOF Arm - Joint 1</h1>
+      <p class="lead-para">
+        Joint 1 is the most difficult joint because it needs to be able to support high torque. With cheap motors (such
+        as this <a href="https://www.amazon.com/dp/B00PNEQKC0?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1"
+          target="_blank">NEMA 17 Stepper Motor</a>), we designed a cycloidal gearbox to convert the speed into high
+        torque.
+      </p>
+      <p>
+        In the base joint, we used only one cycloidal disk, but because of the vertical movement, there was jerk while
+        the arm was coming down. To combat that, we added another disk 180° out of phase to counter the jerk while
+        coming down. That seems to have stabilized the motion a lot.
+      </p>
+      <p>
+        Earlier we were using DRV8825 stepper drivers, which were not able to provide enough current and were blowing
+        up. We switched to DM542TE, which allowed more current to flow safely without frying the Arduino. For testing,
+        we attached a weight of 500 grams at a distance of 10 cm from the gearbox, and the box was able to move without
+        skipping steps.
+      </p>
+      <p>
+        Another improvement we did was in the Arduino code, where we started using microsteps (8x) and reduced the speed
+        and acceleration for smooth movement.
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/tutorial3" target="_blank">here</a>.
+      </p>
+      <details class="code-details">
+        <summary class="code-summary"><i class="fas fa-code"></i> View Arduino Test Code</summary>
+        <pre><code>#include &lt;AccelStepper.h&gt;
+
+// --- Hardware Pins ---
+const int dirPin = 2;
+const int stepPin = 9;
+
+// --- Physical Setup ---
+const int numRollers = 15;                   // Updated for your 15-roller gearbox (14:1 ratio)
+const float reductionRatio = numRollers - 1; 
+const float motorStepsPerRev = 200.0;        // Standard NEMA 17
+const float microstepping = 8.0;             // Updated for 8x microstepping (1600 steps/rev)
+
+// --- Target ---
+const float targetOutputDegrees = 60.0;      // Updated to 30 degrees
+
+// Calculate steps using round() to avoid decimal truncation
+long X_steps = round(((motorStepsPerRev * microstepping * reductionRatio) / 360.0) * targetOutputDegrees);
+
+AccelStepper stepper(1, stepPin, dirPin);
+
+// --- Timing and State Variables ---
+unsigned long pauseStartTime = 0;
+const unsigned long waitDuration = 2000;     // 5 seconds pause in milliseconds
+bool isWaiting = false;
+int moveDirection = 1;                       // 1 for forward, -1 for backward
+
+void setup() {
+  Serial.begin(9600);
+  
+  stepper.setMaxSpeed(800);                 // Increased maximum speed capacity for microstepping
+  stepper.setAcceleration(700);              // Smooth acceleration ramp
+
+  Serial.print("Reduction Ratio: ");
+  Serial.println(reductionRatio);
+  Serial.print("Steps to move output 30 degrees: ");
+  Serial.println(X_steps);
+
+  // Command the first movement
+  stepper.move(X_steps * moveDirection);
+}
+
+void loop() {
+  // Always call run() so the library can process steps dynamically
+  stepper.run();
+
+  // Check if the motor has reached its target position
+  if (stepper.distanceToGo() == 0) {
+    if (!isWaiting) {
+      // Motor just finished moving; start the 5-second timer
+      pauseStartTime = millis();
+      isWaiting = true;
+      Serial.println("Target reached. Waiting 5 seconds...");
+    } else {
+      // Check if 5 seconds have passed
+      if (millis() - pauseStartTime >= waitDuration) {
+        isWaiting = false;                   // Reset waiting flag
+        moveDirection = -moveDirection;      // Reverse the direction
+        
+        Serial.print("Moving in opposite direction: ");
+        Serial.println(X_steps * moveDirection);
+        
+        stepper.move(X_steps * moveDirection);
+      }
+    }
+  }
+}</code></pre>
+      </details>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="3dof_arm_joint1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"

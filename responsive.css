@@ -1,29 +1,49 @@
 /* Responsive CSS file styles defined for smaller width devices */
-/* CSS for tablet devices */
-@media screen and (min-width: 576px) and (max-width: 820px) {
-  .logo {
-      padding: 0 3rem;
-  }
-
+/* CSS for tablet and mobile devices */
+@media screen and (max-width: 900px) {
   .hamburger {
       display: block;
-      padding: 0 3rem;
+      padding: 0.5rem;
   }
 
   .menu {
       position: absolute;
       right: 0;
-      padding: 0 3rem;
-      top: 75px;
-      background-image: linear-gradient(180deg, #74D7BB, #53C8B6, #35A99C);
+      top: 100%;
+      width: 100%;
+      background: linear-gradient(180deg, #35A99C, #2c8c81);
       display: none;
-      transition: all 0.25s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu.active {
+      display: block;
   }
 
   .menu .menu-list {
       flex-direction: column;
+      padding: 1rem 0;
+      gap: 0;
   }
 
+  .menu-list .menu-list-items {
+      text-align: center;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-list .menu-list-items:last-child {
+      border-bottom: none;
+  }
+
+  .menu-list .menu-list-items a {
+      display: block;
+      width: 100%;
+      font-size: 1.05rem;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 820px) {
   .portfolio {
       padding: 0;
   }
@@ -52,9 +72,7 @@
       text-align: center;
       width: 35%;
   }
-
 }
-
 
 /* CSS for mobile devices */
 @media screen and (min-width: 280px) and (max-width: 576px) {
@@ -74,29 +92,6 @@
 
   .btn {
       padding: 10px 30px;
-  }
-
-  .logo {
-      padding: 0 2rem;
-  }
-
-  .menu {
-      position: absolute;
-      right: 0;
-      padding: 0 2rem;
-      top: 75px;
-      background-image: linear-gradient(180deg, #35A99C, #53C8B6, #74D7BB);
-      display: none;
-      transition: all 0.25s;
-  }
-
-  .menu .menu-list {
-      flex-direction: column;
-  }
-
-  .hamburger {
-      display: block;
-      padding: 0 2rem;
   }
 
   .portfolio {
