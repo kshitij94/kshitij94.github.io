@@ -17,7 +17,28 @@
   <header class="header">
     <nav class="navbar">
       <div class="logo">
-        <h2 class="logo-heading">Kshitij Pancholi</h2>
+        <a href="#home" class="logo-link"><h2 class="logo-heading">Kshitij Pancholi</h2></a>
+      </div>
+      <div class="menu">
+        <ul class="menu-list">
+          <li class="menu-list-items"><a href="#home" class="links">Home</a></li>
+          <li class="menu-list-items dropdown">
+            <a href="javascript:void(0)" class="links dropdown-toggle">Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="#linetracker" class="dropdown-item"><i class="fas fa-robot"></i> Line Tracker Robot</a></li>
+              <li><a href="#collisionavoidance" class="dropdown-item"><i class="fas fa-car-side"></i> Collision Avoidance Robot</a></li>
+              <li><a href="#2dof-forward-kinematic" class="dropdown-item"><i class="fas fa-code-branch"></i> 2 DOF Forward Kinematics</a></li>
+              <li><a href="#6dof-ik" class="dropdown-item"><i class="fas fa-vr-cardboard"></i> 6 DOF Inverse Kinematics</a></li>
+              <li><a href="#ball-bearing" class="dropdown-item"><i class="fas fa-cog"></i> 3D Printed Ball Bearing</a></li>
+              <li><a href="#3dof-base-joint" class="dropdown-item"><i class="fas fa-cogs"></i> 3 DOF Arm - Base Joint</a></li>
+              <li><a href="#3dof-joint-1" class="dropdown-item"><i class="fas fa-joint"></i> 3 DOF Arm - Joint 1</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times cross-icon"></i>
       </div>
     </nav>
   </header>
@@ -37,7 +58,7 @@
 
   <section id="linetracker" class="about">
     <div class="about-text">
-      <h1 class="my-heading">Line Tracker Robot</h1>
+      <h1 class="my-heading">Line Tracker Robot <a href="#linetracker" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Goal of the project is to create a robot car that can follow a given path.
       </p>
@@ -66,7 +87,7 @@
 
   <section id="collisionavoidance" class="about">
     <div class="about-text">
-      <h1 class="my-heading">Collision Avoidance Robot</h1>
+      <h1 class="my-heading">Collision Avoidance Robot <a href="#collisionavoidance" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Goal of the project is to create a robot car that can explore the room without colliding into objects.
       </p>
@@ -107,7 +128,7 @@
 
   <section id="2dof-forward-kinematic" class="about">
     <div class="about-text">
-      <h1 class="my-heading">Forward Kinematic with 2 DOF Arm</h1>
+      <h1 class="my-heading">Forward Kinematic with 2 DOF Arm <a href="#2dof-forward-kinematic" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Goal was to master 3D printing and core ROS concepts, including controllers, URDF, and launch files, through the
         hands-on development of a 2-DOF robotic arm.
@@ -148,7 +169,7 @@
 
   <section id="6dof-ik" class="about">
     <div class="about-text">
-      <h1 class="my-heading">Inverse Kinematic simulation for 6 DOF Arm</h1>
+      <h1 class="my-heading">Inverse Kinematic simulation for 6 DOF Arm <a href="#6dof-ik" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Before designing and 3D printing an full scale 6DOF robotic arm, I wanted to see if the Inverse kinematics works
         on a simulated arm.
@@ -169,7 +190,7 @@
 
   <section id="ball-bearing" class="about">
     <div class="about-text">
-      <h1 class="my-heading">3D printing ball bearings</h1>
+      <h1 class="my-heading">3D printing ball bearings <a href="#ball-bearing" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Ordering a metal ball bearing can become very expensive for large-scale applications.
       </p>
@@ -198,7 +219,7 @@
 
   <section id="3dof-base-joint" class="about">
     <div class="about-text">
-      <h1 class="my-heading">3 DOF Arm - Base Joint</h1>
+      <h1 class="my-heading">3 DOF Arm - Base Joint <a href="#3dof-base-joint" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Standard stepper motors are characterized by high speed but low torque, which is often the opposite of what a
         robotic arm requires.
@@ -228,7 +249,7 @@
 
   <section id="3dof-joint-1" class="about">
     <div class="about-text">
-      <h1 class="my-heading">3 DOF Arm - Joint 1</h1>
+      <h1 class="my-heading">3 DOF Arm - Joint 1 <a href="#3dof-joint-1" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
       <p class="lead-para">
         Joint 1 is the most difficult joint because it needs to be able to support high torque. With cheap motors (such
         as this <a href="https://www.amazon.com/dp/B00PNEQKC0?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1"
@@ -330,6 +351,9 @@ void loop() {
       </video>
     </div>
   </section>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Link copied to clipboard!</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
     integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="

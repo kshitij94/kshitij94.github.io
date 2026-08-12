@@ -37,9 +37,43 @@
   }
 
   .menu-list .menu-list-items a {
-      display: block;
+      display: flex;
+      justify-content: center;
       width: 100%;
       font-size: 1.05rem;
+  }
+
+  /* Mobile Dropdown styles */
+  .dropdown-menu {
+      position: static;
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      background: rgba(0, 0, 0, 0.25);
+      border: none;
+      border-radius: 0;
+      min-width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0;
+  }
+
+  .dropdown.active .dropdown-menu {
+      display: block;
+  }
+
+  .dropdown-item {
+      justify-content: center;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 0.92rem;
+  }
+
+  .dropdown-item:hover {
+      padding-left: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #74D7BB;
   }
 }
 
