@@ -25,14 +25,15 @@
           <li class="menu-list-items dropdown">
             <a href="javascript:void(0)" class="links dropdown-toggle">Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
             <ul class="dropdown-menu">
-              <li><a href="#linetracker" class="dropdown-item"><i class="fas fa-robot"></i> Line Tracker Robot</a></li>
-              <li><a href="#collisionavoidance" class="dropdown-item"><i class="fas fa-car-side"></i> Collision Avoidance Robot</a></li>
               <li><a href="#2dof-forward-kinematic" class="dropdown-item"><i class="fas fa-code-branch"></i> 2 DOF Forward Kinematics</a></li>
               <li><a href="#6dof-ik" class="dropdown-item"><i class="fas fa-vr-cardboard"></i> 6 DOF Inverse Kinematics</a></li>
               <li><a href="#ball-bearing" class="dropdown-item"><i class="fas fa-cog"></i> 3D Printed Ball Bearing</a></li>
               <li><a href="#3dof-base-joint-1" class="dropdown-item"><i class="fas fa-cogs"></i> 3 DOF Arm - Base Joint 1</a></li>
               <li><a href="#3dof-joint-2" class="dropdown-item"><i class="fas fa-joint"></i> 3 DOF Arm - Joint 2</a></li>
               <li><a href="#3dof-joint-3" class="dropdown-item"><i class="fas fa-joint"></i> 3 DOF Arm - Joint 3</a></li>
+              <li><a href="#joint2-joint3-connector" class="dropdown-item"><i class="fas fa-link"></i> 3 DOF Arm - Connecting Joint 2 & 3</a></li>
+              <li><a href="#linetracker" class="dropdown-item"><i class="fas fa-robot"></i> Line Tracker Robot</a></li>
+              <li><a href="#collisionavoidance" class="dropdown-item"><i class="fas fa-car-side"></i> Collision Avoidance Robot</a></li>
             </ul>
           </li>
         </ul>
@@ -54,76 +55,6 @@
           Here are the list of robotics projects i have attempted.
         </h4>
       </div>
-    </div>
-  </section>
-
-  <section id="linetracker" class="about">
-    <div class="about-text">
-      <h1 class="my-heading">Line Tracker Robot <a href="#linetracker" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
-      <p class="lead-para">
-        Goal of the project is to create a robot car that can follow a given path.
-      </p>
-      <p>
-        This project utilizes the <a
-          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
-          kit</a>, which includes an Arduino microcontroller and ITR20001 photoelectric sensors. The sensor incorporates
-        three infrared emitter-receiver pair and an NPN phototransistor. The sensor detects reflected infrared light,
-        enabling the detection of surface reflectivity variations (light/dark, color) and proximity. Three independent
-        sensors are employed, each providing an analog output corresponding to the reflected light intensity. By reading
-        these analog values via the Arduino's analog input pins, we can determine which sensor(s) are detecting the
-        black line. This information is then used to implement a line-following algorithm, controlling the robot's
-        motors to maintain the desired trajectory.
-      </p>
-      <p>
-        Arduino Code can be found <a href="line-tracking.txt" target="_blank">here</a>.
-      </p>
-    </div>
-    <div class="about-image">
-      <video width="500" height="500" controls>
-        <source src="linetracking.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </section>
-
-  <section id="collisionavoidance" class="about">
-    <div class="about-text">
-      <h1 class="my-heading">Collision Avoidance Robot <a href="#collisionavoidance" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
-      <p class="lead-para">
-        Goal of the project is to create a robot car that can explore the room without colliding into objects.
-      </p>
-      <p>
-        This project utilizes the <a
-          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
-          kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors.
-        The principle of ultrasonic distance measurement is that
-
-        the transmitter emits ultrasonic waves in a certain direction and starts
-
-        timing at the same time of the launch moment. The ultrasonic waves travel
-
-        through the air and returns immediately when encountering obstacles.
-
-        Then the ultrasonic receiver stops timing immediately when receiving the
-
-        reflected waves. According to the recorded time and the known condition
-
-        that ultrasonic propagation speed in the air is 340m/s, the distance between
-
-        the ultrasonic module and the obstacle can be obtained.
-
-        While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the
-        ultrasonic sensor left and right, then turns to the clear path and proceeds.
-      </p>
-      <p>
-        Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
-      </p>
-    </div>
-    <div class="about-image">
-      <video width="500" height="500" controls>
-        <source src="collisionavoidance.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
     </div>
   </section>
 
@@ -364,6 +295,98 @@ void loop() {
       <p>
         Project code can be found <a href="https://github.com/kshitij94/joint3" target="_blank">here</a>.
       </p>
+    </div>
+  </section>
+
+  <section id="joint2-joint3-connector" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">3 DOF Arm - Connecting Joint 2 and Joint 3 <a href="#joint2-joint3-connector" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
+      <p class="lead-para">
+        Parametric connector designed in Autodesk Fusion 360 to rigidly link Joint 2 and Joint 3 of the robotic arm.
+      </p>
+      <p>
+        To bridge Joint 2 and Joint 3 into a cohesive robotic arm assembly, I developed a Python script for Autodesk
+        Fusion 360 that parametrically generates the structural connection. The assembly comprises a central Base connector
+        along with Motor-Side and Non-Motor-Side Extenders designed to support the mechanical loads and motor placements.
+      </p>
+      <p>
+        The script models mounting features including M3 screw thread holes, clamping nut pockets, and rod holder bores to
+        ensure rigid alignment and eliminate play between the two joints. Upon execution, it automatically generates and
+        exports production-ready STL files (Base, Non-Motor Side Extender, and Motor Side Extender) for 3D printing.
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/joint2_joint3_connector" target="_blank">here</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="linetracker" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Line Tracker Robot <a href="#linetracker" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
+      <p class="lead-para">
+        Goal of the project is to create a robot car that can follow a given path.
+      </p>
+      <p>
+        This project utilizes the <a
+          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
+          kit</a>, which includes an Arduino microcontroller and ITR20001 photoelectric sensors. The sensor incorporates
+        three infrared emitter-receiver pair and an NPN phototransistor. The sensor detects reflected infrared light,
+        enabling the detection of surface reflectivity variations (light/dark, color) and proximity. Three independent
+        sensors are employed, each providing an analog output corresponding to the reflected light intensity. By reading
+        these analog values via the Arduino's analog input pins, we can determine which sensor(s) are detecting the
+        black line. This information is then used to implement a line-following algorithm, controlling the robot's
+        motors to maintain the desired trajectory.
+      </p>
+      <p>
+        Arduino Code can be found <a href="line-tracking.txt" target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="linetracking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="collisionavoidance" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">Collision Avoidance Robot <a href="#collisionavoidance" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
+      <p class="lead-para">
+        Goal of the project is to create a robot car that can explore the room without colliding into objects.
+      </p>
+      <p>
+        This project utilizes the <a
+          href="https://www.amazon.com/ELEGOO-Tracking-Ultrasonic-Intelligent-Educational/dp/B07KPZ8RSZ">ELEGOO robo
+          kit</a>, which includes an Arduino microcontroller and HC-SR04 ultrasonic sensor sensors.
+        The principle of ultrasonic distance measurement is that
+
+        the transmitter emits ultrasonic waves in a certain direction and starts
+
+        timing at the same time of the launch moment. The ultrasonic waves travel
+
+        through the air and returns immediately when encountering obstacles.
+
+        Then the ultrasonic receiver stops timing immediately when receiving the
+
+        reflected waves. According to the recorded time and the known condition
+
+        that ultrasonic propagation speed in the air is 340m/s, the distance between
+
+        the ultrasonic module and the obstacle can be obtained.
+
+        While moving, the car actively checks for obstacles within 30 cm. Upon detection, it uses a servo to sweep the
+        ultrasonic sensor left and right, then turns to the clear path and proceeds.
+      </p>
+      <p>
+        Arduino Code can be found <a href="collision-avoidance.txt" target="_blank">here</a>.
+      </p>
+    </div>
+    <div class="about-image">
+      <video width="500" height="500" controls>
+        <source src="collisionavoidance.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </section>
 
