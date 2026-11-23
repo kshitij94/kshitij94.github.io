@@ -35,6 +35,7 @@
               <li><a href="#world-joint1-connector" class="dropdown-item"><i class="fas fa-anchor"></i> 3 DOF Arm - Connecting World & Joint 1</a></li>
               <li><a href="#linetracker" class="dropdown-item"><i class="fas fa-robot"></i> Line Tracker Robot</a></li>
               <li><a href="#collisionavoidance" class="dropdown-item"><i class="fas fa-car-side"></i> Collision Avoidance Robot</a></li>
+              <li><a href="#zero-position-lock" class="dropdown-item"><i class="fas fa-lock"></i> 3 DOF Arm - Zero Position Lock</a></li>
             </ul>
           </li>
         </ul>
@@ -406,6 +407,24 @@ void loop() {
         <source src="collisionavoidance.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+    </div>
+  </section>
+
+  <section id="zero-position-lock" class="about">
+    <div class="about-text">
+      <h1 class="my-heading">3 DOF Arm - Zero Position Lock <a href="#zero-position-lock" class="section-link-btn" title="Copy direct link"><i class="fas fa-link"></i></a></h1>
+      <p class="lead-para">
+        A precision alignment locking key designed in Autodesk Fusion 360 to set and verify robot joint angles to zero during initialization and calibration.
+      </p>
+      <p>
+        To ensure repeatable and accurate homing before starting the robotic arm, I developed a Python script for Autodesk Fusion 360 that parametrically generates a Zero Position Lock component.
+      </p>
+      <p>
+        The component features a 17 mm by 17 mm square body with a centered 12 mm by 3 mm locking tab along the bottom edge, extruded to a solid 5 mm thickness. This physical key securely slots into the joint alignment notch to lock the arm into its reference zero pose prior to encoder zeroing. The script automatically models the geometry in Fusion 360 and exports production-ready STL files for 3D printing.
+      </p>
+      <p>
+        Project code can be found <a href="https://github.com/kshitij94/zero_position_lock" target="_blank">here</a>.
+      </p>
     </div>
   </section>
 
